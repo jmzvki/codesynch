@@ -547,9 +547,14 @@ function handleResponse(editor, generated, mode, context) {
         return;
     }
 
-    // Insert directly into editor
+// Insert directly into editor
     editor.edit(function(e) {
         if (context.range && context.mode !== "document") {
+            // Strip trailing } when replacing a method scope — the existing brace stays
+if (context.mode === "method") {
+                clean = clean.replace(/\}\s*$/, "").trimEnd();
+                clean = clean + "\n";
+            }
             e.replace(context.range, clean);
         } else {
             var sel = editor.selectedRange;
