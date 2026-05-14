@@ -26,6 +26,12 @@ exports.activate = function() {
             runCommand(editor, "explain");
         })
     );
+    
+    compositeDisposable.add(
+        nova.commands.register("codesynch.refactor", function(editor) {
+            runCommand(editor, "refactor");
+        })
+    );
 
     console.log("CodeSynch activated.");
 };
@@ -413,6 +419,14 @@ function buildPrompt(context, mode) {
             "Include only the public contract — no implementation details.",
             "Then show the original type conforming to it.",
             "Return ONLY code. No markdown fences. No prose."
+        ].join("\n"),
+        refactor: [
+            "Your task: refactor the following code.",
+            "Preserve the exact behavior and public interface — do not change what it does, only how it does it.",
+            "Improve: clarity, structure, naming, redundancy, and idiomatic style.",
+            "If you spot any bugs, fix them and note them in a comment.",
+            "Return ONLY the refactored code — no prose, no markdown fences.",
+            densityNote
         ].join("\n"),
         explain: [
             "Your task: explain this code clearly for a developer unfamiliar with this codebase.",

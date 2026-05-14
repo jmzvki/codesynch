@@ -82,6 +82,15 @@
                 "separator": true
             },
             {
+                "title": "Refactor",
+                "command": "codesynch.refactor",
+                "shortcut": "opt-shift-r",
+                "when": "editorHasFocus"
+            },
+            {
+                "separator": true
+            },
+            {
                 "title": "Generate Protocol / Interface",
                 "command": "codesynch.protocol",
                 "shortcut": "opt-shift-p",
